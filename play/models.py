@@ -19,7 +19,44 @@ class Sport(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class Team(moddls.Model):
+# TEAM MODEL
+class Team(models.Model):
     name = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+# EVENT MODEL
+class Event(models.Model):
+    name = models.CharField(max_length=255)
+    sport = models.ForeignKey(Sport, related_name='users')
+    user = models.ForeignKey(User, related_name='events')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+# USER_TEAM MODEL
+class User_Team(models.Model):
+    user = models.ForeignKey(User, related_name='teams')
+    team = models.ForeignKey(Team, related_name='users')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+# USER_SPORT MODEL
+class User_Sport(models.Model):
+    user = models.ForeignKey(User, related_name='sports')
+    sport = models.ForeignKey(Sport, related_name='users')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+# SPORT_TEAM MODEL
+class Sport_Team(models.Model):
+    user = models.ForeignKey(User, related_name='teams')
+    team = models.ForeignKey(Team, related_name='users')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+# USER_EVENT TABLE
+class User_Event(models.Model):
+    user = models.ForeignKey(User, related_name='events')
+    event = models.ForeignKey(Event, related_name='users')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
