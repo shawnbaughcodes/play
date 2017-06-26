@@ -9,14 +9,16 @@ class UserManager(models.Manager):
         result = {'errors': []}
         if len(post['first_name']) < 2:
             result['errors'].append('Please enter your full first name.')
-        elif len(post['last_name']) < 2:
+        if len(post['last_name']) < 2:
             result['errors'].append('Please enter your full last name.')
-        elif not re.search(r'\w+\@\w+\.\w+', post.get('email')):
+        if not re.search(r'\w+\@\w+\.\w+', post.get('email')):
             result['errors'].append('Please enter a valid email.')
-        elif len(post['password']) < 4:
+        if len(post['password']) < 4:
             result['errors'].append('Please Enter a longer password.')
-        elif post['password_confirmation'] != post['password']:
+        if post['password_confirmation'] != post['password']:
             result['errors'].append('Passwords must match')
+        else:
+            return
         return result
     # END REGISTER VALIDATE
     def create_user(self, post):
@@ -44,6 +46,7 @@ class User(models.Model):
     password = models.CharField(max_length=1000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = UserManager()
 
 # SPORT MODEL
 class Sport(models.Model):

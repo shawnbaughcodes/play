@@ -9,7 +9,7 @@
             <button>Register</button>
             <button>Login</button>
             <h5>Register</h5>
-            <form action="process_user" method="post">
+            <form action="/process" method="post">
                 {%csrf_token%}
                 First Name:
                 <input type="text" name="first_name" placeholder="First Name">
@@ -18,13 +18,13 @@
                 Email:
                 <input type="text" name="email" placeholder="Email">
                 Password:
-                <input type="text" name="password" placeholder="Password">
+                <input type="password" name="password" placeholder="Password">
                 Password Confirmation:
-                <input type="text" name="password_confirmation" placeholder="Password Confirm">
+                <input type="password" name="password_confirmation" placeholder="Password Confirm">
                 <input type="submit" value="Register">
             </form>
             <h5>Login</h5>
-            <form action="login_user" method="post">
+            <form action="/login_user" method="post">
                 {%csrf_token%}
                 Email:
                 <input type="text" name="email" placeholder="Password">
@@ -32,6 +32,9 @@
                 <input type="text" name="password" placeholder="Password">
                 <input type="submit" value="Login">
             </form>
+            {%for message in messages%}
+            <p>{{message}}</p>
+            {%endfor%}
         </div>
     </body>
 </html>
