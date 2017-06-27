@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from polymorphic.models import PolymorphicModel
 import re, bcrypt
 # models below.
 # USER MANAGER
@@ -44,6 +45,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=255)
     email = models.EmailField(max_length=500)
     password = models.CharField(max_length=1000)
+    friend = models.ManyToManyField('self', related_name='friends')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
@@ -72,3 +74,19 @@ class Event(models.Model):
     teams = models.ManyToManyField(Team, related_name='events')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+# CHATROOM MODEL
+class Message(models.Model):
+    message = models.TextField()
+    user = models.ForeignKey(User, related_name='messages')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Chatroom(PolymorphicModel):
+    message = models.ForeignKey(Message, related_name='messages')
+    users = models.ManyToManyField(User, related_name='chatrooms')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class EventChatroom(Chatroom):
+    event = models.ForeignKey(Event, related_name='messages')

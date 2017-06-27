@@ -32,3 +32,25 @@ def home(request):
         'current_user': user
     }
     return render(request, 'play/home.html', context)
+# RENDER SPORT PAGE
+def sport(request):
+    user = current_user(request)
+    # user_sports = user.sports.all()
+    sports_ids = []
+
+    for sport in user.sports.all():
+        sports_ids.append(sport.id)
+
+    context = {
+    'current_user': user,
+    'sports': Sport.objects.all(),
+    'user_sports': user.sports.all(),
+    'sports_ids': sports_ids,
+    }
+    return render(request, 'play/sport.html', context)
+# ADD SPORT
+def add_sport(request, id):
+    user = current_user(request)
+    sport = Sport.objects.get(id=id)
+    user.sports.add(sport)
+    return redirect('/sports')

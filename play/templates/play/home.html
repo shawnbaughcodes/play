@@ -1,5 +1,21 @@
 {%extends 'play/block_content.html'%}
 {%block content%}
-Welcome, {{current_user.first_name}}
-
+<h4 id="current_user">Welcome, {{current_user.first_name}}</h4>
+<div class="select_container">
+    <div class="option" id="option1">
+        <h1><a href="#">Games</a></h1>
+    </div>
+    <div class="option" id="option2">
+        <h1><a href="#">Teams</a></h1>
+    </div>
+    <div class="option" id="option3">
+        <h1><a href="/sports">Sports</a></h1>
+    </div>
+    <div class="option" id="option4">
+        <h1><a href="#">Friends</a></h1>
+    </div>
+    <div class="option" id="option5">
+        <h1><a href="#">Chat</a></h1>
+    </div>
+</div>
 {%endblock%}

@@ -1,0 +1,32 @@
+{%extends 'play/block_content.html'%}
+{%block content%}
+<h4 id="current_user"> {{current_user.first_name}}</h4>
+<div class="current_sports">
+    {%if user_sports|length == 0 %}
+    <div class="no_sports">
+        <h1>{{current_user.first_name}}, you do not have any selected sports currently</h1>
+        <h3>Select from the sports below</h3>
+    </div>
+    {%else%}
+    <div class="selected_sports">
+        {%for sport in user_sports%}
+            <div class="selected_sport">
+                <h1>{{sport.name}}</h1>
+            </div>
+        {%endfor%}
+    </div>
+    {%endif%}
+</div>
+<div class="select_sport">
+    {%for sport in sports%}
+    <a href="/sports/add/{{sport.id}}">
+
+        {%if sport.id not in sports_ids%}
+        <div class="not_selected {{sport.name}}">
+            <h2>{{sport.name}}</h2>
+        </div>
+        {%endif%}
+    </a>
+    {%endfor%}
+</div>
+{%endblock%}
