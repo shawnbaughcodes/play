@@ -1,0 +1,32 @@
+{%extends 'play/block_content.html'%}
+{%block content%}
+<h4 id="current_user">{{current_user.first_name}}</h4>
+<div class="events_container">
+        <div class="events">
+            {%if event|length == 0%}
+                <div class="no_events">
+                    <h1>No {{sport.name}} Events here yet!</h1>
+                </div>
+            {%else%}
+                {%for event in events%}
+                    <div class="current_events">
+                        <p>{{event.name}}</p>
+                    </div>
+                {%endfor%}
+            {%endif%}
+            <div class="users_in_sport">
+                {%for user in users_sports%}
+                <div class="users">
+                    <h2>{{user.first_name}}</h2>
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+
+        <div class="event_options">
+            <a href="/games/{{sport.id}}/new"><h1>Schedule a Game</h1></a>
+            <a href="#"><h1>Cancel a Game</h1></a>
+            <a href="#"><h1>Leaderboards</h1></a>
+        </div>
+</div>
+{%endblock%}

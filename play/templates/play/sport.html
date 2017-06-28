@@ -10,9 +10,12 @@
     {%else%}
     <div class="selected_sports">
         {%for sport in user_sports%}
-            <div class="selected_sport">
-                <h1>{{sport.name}}</h1>
-            </div>
+            <a href="/games/{{sport.id}}">
+                <div class="selected_sport {{sport.name}}">
+                    <h1>{{sport.name}}</h1>
+                    <a href="/sport/remove/{{sport.id}}"><button>Remove {{sport.name}}</button></a>
+                </div>
+            </a>
         {%endfor%}
     </div>
     {%endif%}

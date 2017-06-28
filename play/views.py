@@ -54,3 +54,33 @@ def add_sport(request, id):
     sport = Sport.objects.get(id=id)
     user.sports.add(sport)
     return redirect('/sports')
+# REMOVE SPORT
+def remove_sport(request, id):
+    user = current_user(request)
+    sport = Sport.objects.get(id=id)
+    user.sports.remove(sport)
+    return redirect('/sports')
+# SHOW SPORT EVENT PAGE
+def sport_event(request, id):
+    sport = Sport.objects.get(id=id)
+    user = current_user(request)
+    events = Event.objects.filter(sport = sport)
+    users_sports = sport.users.all()
+    context = {
+        'sport': sport,
+        'current_user': user,
+        'events': events,
+        'users_sports': users_sports
+    }
+    return render(request, 'play/event_sport.html', context)
+# NEW GAME PAGE
+def new_game(request, id):
+    context = {
+    'sport': Sport.objects.get(id=id),
+    'current_user': current_user(request)
+    }
+    return render(request, 'play/new_game.html', context)
+# ADD EVENT
+def add_event(request, id):
+
+    return redirect('/games/id')

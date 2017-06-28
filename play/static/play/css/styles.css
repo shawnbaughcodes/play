@@ -64,23 +64,31 @@ div.option {
     padding-top: 15%;
 }
 .current_sports {
-    width: 3000pt;
+    /*width: 3000pt;*/
+	overflow: scroll;
 }
 .selected_sports {
     height: 450pt;
-    overflow-y: hidden;
-    overflow-x: scroll;
-    width: 3000pt;
-    background-color: yellow;
+    overflow-y: scroll;
+	text-align: center;
+    /*background-color: yellow;*/
 }
 .selected_sport {
-    height: 350pt;
+    height: 250pt;
     display: inline-block;
     background: pink;
-    padding: 3% 3%;
-    margin-left: 5%;
+	border-radius: 50%;
+    /*padding: 3% 3%;*/
+    margin: 5%;
     text-align: center;
-    width: 50px;
+    width: 250pt;
+}
+.selected_sport h1 {
+	padding-top: 40%;
+	color: white;
+}
+.selected_sport button:hover {
+	cursor: pointer;
 }
 .select_sport {
     height: 30vh;
@@ -192,4 +200,57 @@ div.option {
 .Football:hover {
     cursor: pointer;
     background-size: 120%;
+}
+/*EVENTS PAGE*/
+/*EVENTS CONTAINER EDITS*/
+.events {
+	height: 55vh;
+}
+.no_events {
+	background: grey;
+	height: 55vh;
+	width: 49.5vw;
+	display: inline-block;
+}
+.users_in_sport {
+	background: red;
+	height: 55vh;
+	width: 50.2vw;
+	display: inline-block;
+	vertical-align: top;
+	float: right;
+}
+.users_in_sport div.users {
+	background: white;
+	margin: 5%;
+	padding: 10%;
+	display: inline-block;
+	border-radius: 50%;
+}
+.current_events {
+	background: grey;
+	height: 55vh;
+	width: 49.5vw;
+	display: inline-block;
+}
+.event_options {
+	height: 50vh;
+	width: 100vw;
+	text-align: center;
+	background: url('../img/event_options_bg.jpg');
+	background-size: cover;
+	background-position: 0% 70%;
+}
+.event_options a {
+	display: inline-block;
+	margin: 5%;
+	margin-top: 10%;
+	border-radius: 10px;
+	background: white;
+	font-size: 20pt;
+	text-align: center;
+
+}
+.event_options h1:hover {
+	cursor: pointer;
 }
