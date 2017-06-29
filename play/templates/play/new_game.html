@@ -2,6 +2,20 @@
 {%block content%}
 <div class="new_game_container">
     <h1>Schedule your {{sport.name}} game here!</h1>
-
+    <form class="" action="/add_event" method="post">
+        Player:
+        <select class="player_select" name="player">
+            <option disabled selected>select</option>
+            {%for user in users%}
+                {%if user.id != current_user.id%}
+                <option>{{user.first_name}}</option>
+                {%endif%}
+            {%endfor%}
+        </select>
+        Team:
+        Location:
+        Time:
+        <input type="submit" value="Schedule Game!">
+    </form>
 </div>
 {%endblock%}

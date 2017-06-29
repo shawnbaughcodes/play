@@ -4,10 +4,13 @@
         <meta charset="utf-8">
         {%load staticfiles%}
         <link rel="stylesheet" href="{%static 'play/css/styles.css'%}">
-        
+
         <title>Play</title>
     </head>
     <body>
+        {%if current_user%}
+        <a href="/logout"><button>Logout</button></a>
+        {%endif%}
         {%block content%}
         {%endblock%}
     </body>

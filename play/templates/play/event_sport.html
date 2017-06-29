@@ -16,9 +16,11 @@
             {%endif%}
             <div class="users_in_sport">
                 {%for user in users_sports%}
+                {%if user.id != current_user.id%}
                 <div class="users">
                     <h2>{{user.first_name}}</h2>
                 </div>
+                {%endif%}
                 {%endfor%}
             </div>
         </div>

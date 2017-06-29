@@ -27,9 +27,9 @@
             <form action="/login_user" method="post">
                 {%csrf_token%}
                 Email:
-                <input type="text" name="email" placeholder="Password">
+                <input type="text" name="email" placeholder="Email">
                 Password:
-                <input type="text" name="password" placeholder="Password">
+                <input type="password" name="password" placeholder="Password">
                 <input type="submit" value="Login">
             </form>
             {%for message in messages%}

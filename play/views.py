@@ -24,7 +24,19 @@ def process(request):
         request.session['user_id'] = user.id
         return redirect('/home')
 # LOGIN
-
+def login(request):
+    is_valid = User.objects.login_validate(request.POST)
+    if is_valid['status'] == True:
+        request.session['user_id'] = is_valid['user'].id
+        return redirect('/home')
+    else:
+        if is_valid['status'] == False:
+            messages.error(request, is_valid['message'])
+            return redirect('/')
+# LOGOUT
+def logout(request):
+    request.session.clear()
+    return redirect('/')
 # RENDER HOME
 def home(request):
     user = current_user(request)
@@ -77,7 +89,8 @@ def sport_event(request, id):
 def new_game(request, id):
     context = {
     'sport': Sport.objects.get(id=id),
-    'current_user': current_user(request)
+    'current_user': current_user(request),
+    'users': User.objects.all()
     }
     return render(request, 'play/new_game.html', context)
 # ADD EVENT
