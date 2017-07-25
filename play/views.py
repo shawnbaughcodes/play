@@ -40,8 +40,15 @@ def logout(request):
 # RENDER HOME
 def home(request):
     user = current_user(request)
+    sports_ids = []
+    for sport in user.sports.all():
+        sports_ids.append(sport.id)
+    events = Event.objects.all() #.where(location =)
     context = {
-        'current_user': user
+        'current_user': user,
+        'sports': Sport.objects.all(),
+        'user_sports': user.sports.all(),
+        'sports_ids': sports_ids,
     }
     return render(request, 'play/home.html', context)
 # RENDER SPORT PAGE
@@ -57,6 +64,7 @@ def sport(request):
     'current_user': user,
     'sports': Sport.objects.all(),
     'user_sports': user.sports.all(),
+    'events': events,
     'sports_ids': sports_ids,
     }
     return render(request, 'play/sport.html', context)
@@ -96,5 +104,5 @@ def new_game(request, id):
     return render(request, 'play/new_game.html', context)
 # ADD EVENT
 def add_event(request, id):
-    
+
     return redirect('/games/id')

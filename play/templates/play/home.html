@@ -1,21 +1,67 @@
 {%extends 'play/block_content.html'%}
 {%block content%}
-<h4 id="current_user">Welcome, {{current_user.first_name}}</h4>
-<div class="select_container">
-    <div class="option" id="option1">
-        <h1><a href="#">Games</a></h1>
-    </div>
-    <div class="option" id="option2">
-        <h1><a href="#">Teams</a></h1>
-    </div>
-    <div class="option" id="option3">
-        <h1><a href="/sports">Sports</a></h1>
-    </div>
-    <div class="option" id="option4">
-        <h1><a href="#">Friends</a></h1>
-    </div>
-    <div class="option" id="option5">
-        <h1><a href="#">Chat</a></h1>
-    </div>
-</div>
+
+      <div class="side_nav z-depth-4">
+          <div class="container">
+            <!-- Grey navigation panel -->
+                <div class="user_info ">
+                    <div class="col s3">
+                        <p id="current_user">   {{current_user.first_name}} {{current_user.last_name}}
+                            <br>
+                            {{current_user.email}}
+                        </p>
+                        {%if current_user%}
+                        <a href="#"><button class="btn">Chat</button></a>
+                        <br>
+                        <br>
+                        <a href="/logout"><button class="btn">Logout</button></a>
+                        {%endif%}
+                    </div>
+                    <div class="friends z-depth-4">
+                        <ul class="collection with-header">
+                            <li class="collection-header"><h6>Friends</h6></li>
+                            {%for sport in sports%}
+                            <li class="collection-item">{{sport.name}}</li>
+                            {%endfor%}
+                        </ul>
+                    </div>
+                    <div class="sports z-depth-4">
+                        <ul class="collection with-header">
+                            <li class="collection-header"><h6>Sports</h6></li>
+                            {%for sport in user_sports%}
+                            <li class="collection-item">{{sport.name}}</li>
+                            {%endfor%}
+                        </ul>
+                    </div>
+                </div>
+          </div>
+      </div>
+      <div class="content">
+          <div class="col s8">
+              <!-- SEARCHBAR -->
+            <nav>
+                <div class="nav-wrapper search_bar">
+                    <form class="">
+                        <div class="input-field">
+                            <input id="search" type="search" required>
+                            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+            <!-- EVENTS -->
+            <div class="col s5">
+                <div class="events z-depth-4">
+
+                    {%for event in events%}
+                    <div class="event">
+
+                    </div>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+      </div>
+
 {%endblock%}
