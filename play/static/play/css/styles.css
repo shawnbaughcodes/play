@@ -4,8 +4,78 @@
 	margin: 0;
 	border: 0;
 }
-body {
-    overflow: hidden;
+div.header {
+	background: url('../img/Basketball.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 70vh;
+	overflow: hidden;
+}
+.header h1 {
+	padding-top: 23vh;
+	text-align: center;
+	font-weight: bold;
+	font-size: 100pt;
+	color: white;
+}
+.info {
+	height: 50vh;
+}
+.info h1 {
+	text-align: center;
+	font-weight: bold;
+	font-size: 40pt;
+}
+.box1 {
+	background: #80cbc4;
+	height: 35vh;
+	width: 20vw;
+	margin-left: 2%;
+	margin-right: 2%;
+	display: inline-block;
+	border-radius: 3px;
+	/*margin-top: 2vh;*/
+	vertical-align: top;
+}
+td, th{
+	text-align: center;
+	font-size: 22pt;
+}
+.box2 {
+	background: #80cbc4;
+	height: 35vh;
+	width: 20vw;
+	margin-left: 2%;
+	margin-right: 2%;
+	display: inline-block;
+	border-radius: 3px;
+	margin-top: 11vh;
+	vertical-align: top;
+}
+.box3 {
+	background: #80cbc4;
+	height: 35vh;
+	width: 20vw;
+	margin-left: 2%;
+	margin-right: 2%;
+	display: inline-block;
+	border-radius: 3px;
+	margin-top: 5vh;
+	vertical-align: top;
+}
+div.header2 {
+	background: url('../img/Tennis.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 70vh;
+	overflow: hidden;
+}
+.header2 h1 {
+	padding-top: 23vh;
+	text-align: center;
+	font-weight: bold;
+	font-size: 100pt;
+	color: white;
 }
 a {
     color: inherit;

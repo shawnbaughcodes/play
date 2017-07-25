@@ -87,13 +87,14 @@ def sport_event(request, id):
     return render(request, 'play/event_sport.html', context)
 # NEW GAME PAGE
 def new_game(request, id):
+    sport = Sport.objects.get(id=id)
     context = {
-    'sport': Sport.objects.get(id=id),
-    'current_user': current_user(request),
-    'users': User.objects.all()
+        'sport': sport,
+        'current_user': current_user(request),
+        'users': User.objects.filter(sports = sport)
     }
     return render(request, 'play/new_game.html', context)
 # ADD EVENT
 def add_event(request, id):
-
+    
     return redirect('/games/id')

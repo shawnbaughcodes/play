@@ -1,40 +1,194 @@
 <!DOCTYPE html>
 <html>
     <head>
+        {%load staticfiles%}
+        <!-- MATERIALIZE -->
+        <link rel="stylesheet" href="{% static 'play/css/materialize.min.css' %}">
+        <!-- JQUERY -->
+        <script type="text/javascript" src="{%static 'play/js/jquery-3.2.1.min.js'%}">
+        </script>
+        <!-- MATERIALIZE JQ -->
+        <script type="text/javascript" src="{%static 'play/js/materialize.min.js'%}">
+        </script>
+        <!-- STYLES -->
+        <link rel="stylesheet" href="{% static 'play/css/styles.css' %}">
         <meta charset="utf-8">
+        <!-- SCRIPTS -->
+        <script type="text/javascript" src="{%static 'play/js/script.js'%}">
+        </script>
         <title>Play</title>
     </head>
-    <body>
-        <div class="login">
-            <button>Register</button>
-            <button>Login</button>
-            <h5>Register</h5>
-            <form action="/process" method="post">
-                {%csrf_token%}
-                First Name:
-                <input type="text" name="first_name" placeholder="First Name">
-                Last Name:
-                <input type="text" name="last_name" placeholder="Last Name">
-                Email:
-                <input type="text" name="email" placeholder="Email">
-                Password:
-                <input type="password" name="password" placeholder="Password">
-                Password Confirmation:
-                <input type="password" name="password_confirmation" placeholder="Password Confirm">
-                <input type="submit" value="Register">
-            </form>
-            <h5>Login</h5>
-            <form action="/login_user" method="post">
-                {%csrf_token%}
-                Email:
-                <input type="text" name="email" placeholder="Email">
-                Password:
-                <input type="password" name="password" placeholder="Password">
-                <input type="submit" value="Login">
-            </form>
-            {%for message in messages%}
-            <p>{{message}}</p>
-            {%endfor%}
+    <body class="grey">
+        <!-- NAVBAR -->
+      <!-- Modal Structure -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+            <h3>Login</h3>
+                <form class="" action="/login_user" method="post">
+                    {%csrf_token%}
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="email" id="" type="text" class="validate"  name="email">
+                        </div>
+                        <div class="input-field col s12">
+                            <input placeholder="password" id="" type="password" class="validate"  name="password">
+                        </div>
+                        <div class="input-field col s6">
+                            <input class="btn waves-effect" type="submit" value="Login">
+                        </div>
+                        {%for message in messages%}
+                        <p>{{message}}</p>
+                        {%endfor%}
+                    </div>
+                </form>
+            </div>
         </div>
+      <!-- Modal2 Structure -->
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <h3>Register</h3>
+                <form action="/process" method="post">
+                    {%csrf_token%}
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input type="text" name="first_name" placeholder="First Name">
+                        </div>
+                        <div class="input-field col s6">
+                            <input type="text" name="last_name" placeholder="Last Name">
+                        </div>
+                        <div class="input-field col s12">
+                            <input type="text" name="email" placeholder="Email">
+                        </div>
+                        <div class="input-field col s12">
+                            <input type="password" name="password" placeholder="Password">
+                        </div>
+                        <div class="input-field col s12">
+                            <input type="password" name="password_confirmation" placeholder="Password Confirmation">
+                        </div>
+                        <div class="input-field col s12">
+                            <input class="btn waves-effect" type="submit" value="Register">
+                        </div>
+                        {%for message in messages%}
+                        <p>{{message}}</p>
+                        {%endfor%}
+                    </div>
+                </form>
+            </div>
+        </div>
+        <nav>
+            <div class="nav-wrapper teal lighten-3 navbar-fixed">
+                <a href="#" class="brand-logo right">Play</a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a class="modal-trigger" href="#modal1">Login</a></li>
+                    <li><a class="modal-trigger" href="#modal2">Register</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- HEADER -->
+        <div class="header">
+            <div class="container">
+                <h1>PLAY</h1>
+            </div>
+        </div>
+        <!-- INFO -->
+        <div class="info">
+            <h1>Connect. Schedule. Play.</h1>
+            <div class="container">
+                <div class="box1 z-depth-5">
+                    <table class="highlight">
+                        <thead>
+                            <tr>
+                                <th>Connect</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Signup</td>
+                            </tr>
+                            <tr>
+                                <td>Add Sports</td>
+                            </tr>
+                            <tr>
+                                <td>Play</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="box2 z-depth-5">
+                    <table class="highlight">
+                        <thead>
+                            <tr>
+                                <th>Schedule</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Make Events</td>
+                            </tr>
+                            <tr>
+                                <td>Join Teams</td>
+                            </tr>
+                            <tr>
+                                <td>Play</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="box3 z-depth-5">
+                    <table class="highlight">
+                        <thead>
+                            <tr>
+                                <th>Play</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Join Events</td>
+                            </tr>
+                            <tr>
+                                <td>Chat With Members</td>
+                            </tr>
+                            <tr>
+                                <td>Play</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- HEADER 2 -->
+        <div class="header2">
+            <div class="container">
+                <h1>Get Out And Play</h1>
+            </div>
+        </div>
+        <footer class="page-footer black">
+            <div class="container">
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h5 class="white-text">Play App</h5>
+                        <p class="grey-text text-lighten-4">Play app was designed to make getting pick-up games for your favorite sports easier. Select a sport, create an event, schedule a game. It's all easier in Play.</p>
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                        <h5 class="white-text">Social</h5>
+                        <ul>
+                            <li><a class="grey-text text-lighten-3" href="#!">Facebook</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Twitter</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Instagram</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">YouTube</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    © 2017 Copyright all rights reserved.
+                    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                </div>
+            </div>
+        </footer>
     </body>
 </html>

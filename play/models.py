@@ -68,8 +68,8 @@ class Team(models.Model):
 # EVENT MODEL
 class Event(models.Model):
     name = models.CharField(max_length=255)
-    date = models.DateField()
-    time = models.TimeField()
+    datetime = models.DateTimeField(auto_now=False)
+    location = models.CharField(max_length=500)
     sport = models.ForeignKey(Sport, related_name='events')
     user = models.ForeignKey(User, related_name='user_events')
     users = models.ManyToManyField(User, related_name='events')
