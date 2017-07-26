@@ -89,13 +89,42 @@
                 </div>
                 <!-- SPORTS -->
                 <div class="user_sports">
+                    {%for sport in user_sports%}
                     <div class="sport">
-                        {%for sport in user_sports%}
                         <img src="static/play/img/{{sport.name}}_icon.png" alt="{{sport.name}} Icon">
                         <p>{{sport.name}}</p>
-                        {%endfor%}
                     </div>
+                    {%endfor%}
                 </div>
+            </div>
+        </div>
+        <!-- LEADERBOARD -->
+        <div class="leaderboard z-depth-4">
+            <div class="leaderboard_title">
+                <h2>Leaderboard</h2>
+                <h4>Your Rankings</h4>
+                <h5>{{current_user.first_name}}</h5>
+            </div>
+            <div class="leaderboard_table">
+                <table class="borderd highlight">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Sports</th>
+                            <th>Rankings</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>user.name</td>
+                            <td>user.sport</td>
+                            <td>user.ranking</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
             </div>
         </div>
       </div>
