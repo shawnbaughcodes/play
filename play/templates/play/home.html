@@ -2,7 +2,7 @@
 {%block content%}
 
       <div class="side_nav z-depth-4">
-          <div class="container">
+          <div class="container ">
             <!-- Grey navigation panel -->
                 <div class="user_info ">
                     <div class="col s3">
@@ -37,28 +37,64 @@
           </div>
       </div>
       <div class="content">
-          <div class="col s8">
+          <div class="col s9">
               <!-- SEARCHBAR -->
-            <nav>
-                <div class="nav-wrapper search_bar">
-                    <form class="">
-                        <div class="input-field">
-                            <input id="search" type="search" required>
-                            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                        <i class="material-icons">close</i>
-                        </div>
-                    </form>
-                </div>
-            </nav>
+            <div class="navbar-fixed">
+                <nav class="">
+                    <div class="nav-wrapper search_bar">
+                        <form class="">
+                            <div class="input-field">
+                                <input id="search" type="search" required>
+                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                            <i class="material-icons">close</i>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+            </div>
             <!-- EVENTS -->
-            <div class="col s5">
                 <div class="events z-depth-4">
-
-                    {%for event in events%}
+                    <h1>Events</h1>
+                    <!-- {%for event in events%} -->
                     <div class="event">
+                        <h5>Event Name @ Location</h5>
+                        <h6>Event Team</h6>
+                        <h6>Event Time</h6>
 
                     </div>
-                    {%endfor%}
+                    <!-- {%endfor%} -->
+                </div>
+            <div class="teams_and_user_sports">
+                <!-- TEAMS -->
+                <div class="teams z-depth-4">
+                    <table class="borderd highlight">
+                        <thead>
+                            <tr>
+                                <th>Team Name</th>
+                                <th>Teammates</th>
+                                <th>Sport</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td id="">team.name</td>
+                                <td id="">team.users</td>
+                                <td id="">team.sport</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- SPORTS -->
+                <div class="user_sports">
+                    <div class="sport">
+                        {%for sport in user_sports%}
+                        <img src="static/play/img/{{sport.name}}_icon.png" alt="{{sport.name}} Icon">
+                        <p>{{sport.name}}</p>
+                        {%endfor%}
+                    </div>
                 </div>
             </div>
         </div>

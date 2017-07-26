@@ -10,6 +10,8 @@ def current_user(request):
 
 # INDEX ROUTE
 def index(request):
+    if current_user(request):
+        return redirect('/home')
     return render(request, 'play/index.html')
 # END INDEX ROUTE
 # REGISTER USER

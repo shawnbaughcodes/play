@@ -122,6 +122,7 @@ a {
 	display: inline-block;
 	float: right;
 	vertical-align: top;
+	overflow-y: scroll;
 }
 .content nav {
 	background: #AED1E6;
@@ -135,7 +136,60 @@ i {
 	height: 85vh;
 	width: 30vw;
 	display: inline-block;
-	background: rgba(0, 0, 0, 0.7);
+	vertical-align: top;
+	background: rgba(0, 0, 0, 0.4);
+
+}
+.events h1 {
+	color: white;
+	text-align: center;
+	font-weight: bold;
+}
+.event h5 {
+	color: white;
+	text-align: center;
+	font-weight: bold;
+}
+.event h6 {
+	color: white;
+	text-align: center;
+}
+/*TEAMS AND USER SPORTS*/
+.teams_and_user_sports  {
+	display: inline-block;
+	width: 48vw;
+	margin-top: 3%;
+	border-radius: 5px;
+}
+/*TEAMS*/
+.teams {
+	height: 55vh;
+	overflow-y: scroll;
+	vertical-align: top;
+	background: #07A0C3;
+}
+
+/*SPORTS*/
+.user_sports {
+	display: inline-block;
+	width: 48vw;
+	max-height: 25vh;
+	margin-top: 5%;
+	vertical-align: top;
+	overflow-x: scroll;
+	overflow-y: hidden;
+}
+.sport {
+	display: inline-block;
+	vertical-align: top;
+}
+.sport img {
+	height: 20vh;
+	display: inline-block;
+}
+.sport p {
+	text-align: center;
+	font-weight: bold;
 }
 /*SPORT.HTML EDITS*/
 .no_sports {
