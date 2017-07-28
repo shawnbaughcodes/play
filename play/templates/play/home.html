@@ -1,132 +1,110 @@
 {%extends 'play/block_content.html'%}
 {%block content%}
+    <!-- SEARCHBAR -->
+    <div class="navbar-fixed">
+        <nav class="">
+            <div class="nav-wrapper search_bar">
+                <form class="">
+                    <div class="input-field">
+                        <input id="search" type="search" required>
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </div>
 
-      <div class="side_nav z-depth-4">
-          <div class="container ">
-            <!-- Grey navigation panel -->
-                <div class="user_info ">
-                    <div class="col s3">
-                        <p id="current_user">   {{current_user.first_name}} {{current_user.last_name}}
-                            <br>
-                            {{current_user.email}}
-                        </p>
-                        {%if current_user%}
-                        <a href="#"><button class="btn">Chat</button></a>
-                        <br>
-                        <br>
-                        <a href="/logout"><button class="btn">Logout</button></a>
-                        {%endif%}
-                    </div>
-                    <div class="friends z-depth-4">
-                        <ul class="collection with-header">
-                            <li class="collection-header"><h6>Friends</h6></li>
-                            {%for sport in sports%}
-                            <li class="collection-item">{{sport.name}}</li>
-                            {%endfor%}
-                        </ul>
-                    </div>
-                    <div class="sports z-depth-4">
-                        <ul class="collection with-header">
-                            <li class="collection-header"><h6>Sports</h6></li>
-                            {%for sport in user_sports%}
-                            <li class="collection-item">{{sport.name}}</li>
-                            {%endfor%}
-                        </ul>
-                    </div>
-                </div>
-          </div>
-      </div>
       <div class="content">
-          <div class="col s9">
-              <!-- SEARCHBAR -->
-            <div class="navbar-fixed">
-                <nav class="">
-                    <div class="nav-wrapper search_bar">
-                        <form class="">
-                            <div class="input-field">
-                                <input id="search" type="search" required>
-                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                            <i class="material-icons">close</i>
-                            </div>
-                        </form>
-                    </div>
-                </nav>
-            </div>
-            <!-- EVENTS -->
-                <div class="events z-depth-4">
-                    <h1>Events</h1>
-                    <!-- {%for event in events%} -->
-                    <div class="event">
-                        <h5>Event Name @ Location</h5>
-                        <h6>Event Team</h6>
-                        <h6>Event Time</h6>
+          <div class="container">
+              <div class="col 12">
+                  <!-- SIDEBAR -->
+                  <div class="side_nav z-depth-4">
+                      <div class="user_info">
+                          <div class="col s3">
+                              <p id="current_user">   {{current_user.first_name}} {{current_user.last_name}}
+                              </p>
+                              {%if current_user%}
+                              <a href="#"><button class="btn">Chat</button></a>
+                              <br>
+                              <br>
+                              <a href="/logout"><button class="btn">Logout</button></a>
+                              {%endif%}
+                          </div>
+                      </div>
+                  </div>
+                  <!-- EVENTS -->
+                  <div class="events z-depth-4">
+                      <h1>Events</h1>
+                      {%for event in events%}
+                      <div class="event">
+                          <h5>{{event.name}}</h5>
+                          <h5>{{event.location.street}}
+                              {{event.location.city}}
+                              {{event.location.state}}
+                              {{event.location.zip_code}}
+                          </h5>
+                          <h6>Hosted by {{event.user.first_name}}</h6>
+                          <h6>{{event.datetime.date}}</h6>
+                          <h6>@ {{event.datetime.time}}</h6>
+                      </div>
+                      {%endfor%}
+                  </div>
+                  <div class="teams_and_user_sports">
+                      <!-- LEADERBOARD -->
+                      <div class="leaderboard z-depth-4">
+                          <div class="leaderboard_title">
+                              <h2>Leaderboard</h2>
+                              <h4>Your Rankings</h4>
+                              <h5>{{current_user.first_name}}</h5>
+                          </div>
+                          <div class="leaderboard_table">
+                              <table class="borderd highlight">
+                                  <thead>
+                                      <tr>
+                                          <th>Name</th>
+                                          <th>Sports</th>
+                                          <th>Rankings</th>
+                                      </tr>
+                                  </thead>
 
-                    </div>
-                    <!-- {%endfor%} -->
-                </div>
-            <div class="teams_and_user_sports">
-                <!-- TEAMS -->
-                <div class="teams z-depth-4">
-                    <table class="borderd highlight">
-                        <thead>
-                            <tr>
-                                <th>Team Name</th>
-                                <th>Teammates</th>
-                                <th>Sport</th>
-                            </tr>
-                        </thead>
+                                  <tbody>
 
-                        <tbody>
+                                      <tr>
+                                          <td>user.name</td>
+                                          <td>user.sport</td>
+                                          <td>user.ranking</td>
+                                      </tr>
 
-                            <tr>
-                                <td id="">team.name</td>
-                                <td id="">team.users</td>
-                                <td id="">team.sport</td>
-                            </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                      <!-- TEAMS -->
+                      <div class="teams z-depth-4">
+                          <table class="borderd highlight">
+                              <thead>
+                                  <tr>
+                                      <th>Team Name</th>
+                                      <th>Teammates</th>
+                                      <th>Sport</th>
+                                  </tr>
+                              </thead>
 
-                        </tbody>
-                    </table>
-                </div>
-                <!-- SPORTS -->
-                <div class="user_sports">
-                    {%for sport in user_sports%}
-                    <div class="sport">
-                        <img src="static/play/img/{{sport.name}}_icon.png" alt="{{sport.name}} Icon">
-                        <p>{{sport.name}}</p>
-                    </div>
-                    {%endfor%}
-                </div>
-            </div>
-        </div>
-        <!-- LEADERBOARD -->
-        <div class="leaderboard z-depth-4">
-            <div class="leaderboard_title">
-                <h2>Leaderboard</h2>
-                <h4>Your Rankings</h4>
-                <h5>{{current_user.first_name}}</h5>
-            </div>
-            <div class="leaderboard_table">
-                <table class="borderd highlight">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Sports</th>
-                            <th>Rankings</th>
-                        </tr>
-                    </thead>
+                              <tbody>
 
-                    <tbody>
+                                  <tr>
+                                      <td id="">team.name</td>
+                                      <td id="">team.users</td>
+                                      <td id="">team.sport</td>
+                                  </tr>
 
-                        <tr>
-                            <td>user.name</td>
-                            <td>user.sport</td>
-                            <td>user.ranking</td>
-                        </tr>
-                        
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
       </div>
 
 {%endblock%}

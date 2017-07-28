@@ -88,16 +88,22 @@ a {
     text-align: left;
     padding-right: 2%;
 }
+.container {
+	width: 80%;
+}
 .side_nav {
+	margin-top: 3%;
 	width: 15vw;
-	height: 100vh;
+	height: 30vh;
 	background: #AED1E6;
 	display: inline-block;
+	vertical-align: top;
+	text-align: center;
 }
 .user_info {
 	text-align: center;
 	display: inline-block;
-	margin-left: 1.5vw;
+	margin-left: 1vw;
 }
 #current_user {
 	margin-top: 5vh;
@@ -116,7 +122,7 @@ a {
 	overflow-y: scroll;
 }
 .content {
-	width: 85vw;
+	width: 100vw;
 	height: 100vh;
 	background: #F0F7EE;
 	display: inline-block;
@@ -125,17 +131,14 @@ a {
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
-.content nav {
+nav {
 	background: #AED1E6;
-}
-i {
-	color: black;
 }
 /*EVENTS*/
 .events {
 	margin: 3%;
 	height: 85vh;
-	width: 30vw;
+	width: 40vw;
 	display: inline-block;
 	vertical-align: top;
 	background: rgba(0, 0, 0, 0.4);
@@ -158,7 +161,7 @@ i {
 /*TEAMS AND USER SPORTS*/
 .teams_and_user_sports  {
 	display: inline-block;
-	width: 47vw;
+	width: 15vw;
 	margin-top: 3%;
 	border-radius: 5px;
 }
@@ -180,6 +183,9 @@ i {
 	overflow-y: hidden;
 	-webkit-overflow-scrolling: touch;
 }
+.user_sports h1 {
+	text-align: center;
+}
 .sport {
 	display: inline-block;
 	vertical-align: top;
@@ -195,14 +201,16 @@ i {
 /*LEADERBOARD*/
 .leaderboard {
 	height: 35vh;
-	width: 80vw;
+	width: 15vw;
 	background: teal;
-	margin: 3%;
+	margin-bottom: 2%;
+	overflow: scroll;
 }
 .leaderboard_title {
 	display: inline-block;
 	text-align: center;
 	height: 35vh;
+	margin-left: 1%;
 }
 .leaderboard_table {
 	display: inline-block;

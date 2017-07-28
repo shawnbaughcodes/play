@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
 from django.contrib import messages
+import operator
 # Create your views here.
 
 # CURRENT USER
@@ -41,16 +42,33 @@ def logout(request):
     return redirect('/')
 # RENDER HOME
 def home(request):
+    # class PlaySearchListView(PlayListView):
+    #     paginate_by = 10
+    #     def get_queryset(self):
+    #         result = super(PlaySearchListView, self).get_queryset()
+    #
+    #         query = self.request.GET.get('search')
+    #         if query:
+    #             query_list = query.split()
+    #             result = result.filter(
+    #             reduce(operator.or_,
+    #                 (Q(title__icontains=search)))
+    #             )
     user = current_user(request)
     sports_ids = []
+
     for sport in user.sports.all():
         sports_ids.append(sport.id)
-    events = Event.objects.all() #.where(location =)
+
+    events = Event.objects.all() #.where(location = )
+    friends = user.friend.all()
     context = {
         'current_user': user,
         'sports': Sport.objects.all(),
         'user_sports': user.sports.all(),
         'sports_ids': sports_ids,
+        'friends': friends,
+        'events': events,
     }
     return render(request, 'play/home.html', context)
 # RENDER SPORT PAGE
