@@ -5,7 +5,9 @@
 	border: 0;
 }
 body {
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	font-weight:
 }
 div.header {
 	background: url('../img/Basketball.jpg');
@@ -99,6 +101,7 @@ a {
 	display: inline-block;
 	vertical-align: top;
 	text-align: center;
+	/*position: fixed;*/
 }
 .user_info {
 	text-align: center;
@@ -141,21 +144,28 @@ nav {
 	width: 40vw;
 	display: inline-block;
 	vertical-align: top;
-	background: rgba(0, 0, 0, 0.4);
-
+	overflow-y: scroll;
 }
 .events h1 {
 	color: white;
 	text-align: center;
 	font-weight: bold;
+		color: black;
+}
+.event {
+	background: white;
+	padding: 2%;
+}
+.event h4 {
+	text-align: center;
+	/*font-weight: bold;*/
 }
 .event h5 {
-	color: white;
 	text-align: center;
 	font-weight: bold;
 }
 .event h6 {
-	color: white;
+	color: ;
 	text-align: center;
 }
 /*TEAMS AND USER SPORTS*/
@@ -167,10 +177,15 @@ nav {
 }
 /*TEAMS*/
 .teams {
-	height: 55vh;
+	height: 50vh;
 	overflow-y: scroll;
 	vertical-align: top;
-	background: #07A0C3;
+	background: inherit;
+	text-align: center;
+}
+.team_list {
+	margin-left: 5%;
+	margin-right: 5%;
 }
 /*SPORTS*/
 .user_sports {
@@ -202,15 +217,23 @@ nav {
 .leaderboard {
 	height: 35vh;
 	width: 15vw;
-	background: teal;
+	background: inherit;
 	margin-bottom: 2%;
-	overflow: scroll;
+	overflow-x: hidden;
+	overflow-y: hidden;
 }
 .leaderboard_title {
-	display: inline-block;
+	/*display: inline-block;*/
 	text-align: center;
 	height: 35vh;
-	margin-left: 1%;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+.collection {
+	background: white;
+	min-height: 30%;
+	max-height: 100%;
+	overflow: scroll;
 }
 .leaderboard_table {
 	display: inline-block;

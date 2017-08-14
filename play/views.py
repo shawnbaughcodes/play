@@ -62,6 +62,7 @@ def home(request):
 
     events = Event.objects.all() #.where(location = )
     friends = user.friend.all()
+    users = User.objects.all()
     context = {
         'current_user': user,
         'sports': Sport.objects.all(),
@@ -69,6 +70,7 @@ def home(request):
         'sports_ids': sports_ids,
         'friends': friends,
         'events': events,
+        'users': users,
     }
     return render(request, 'play/home.html', context)
 # RENDER SPORT PAGE

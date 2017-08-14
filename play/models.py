@@ -23,7 +23,8 @@ class UserManager(models.Manager):
         return result
     # END REGISTER VALIDATE
     def create_user(self, post):
-        user = User.objects.create(first_name=post.get('first_name'), last_name=post.get('last_name'), email=post.get('email'), password=bcrypt.hashpw(post.get('password').encode(), bcrypt.gensalt()))
+        user = User.objects.create(
+        first_name=post.get('first_name'), last_name=post.get('last_name'), email=post.get('email'), password=bcrypt.hashpw(post.get('password').encode(), bcrypt.gensalt()))
         return user
     # END CREATE USER
     def login_validate(self, post):
@@ -66,20 +67,21 @@ class Team(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 # LOCATION MODEL
-class Location(models.Model):
-    street = models.CharField(max_length=500)
-    city = models.CharField(max_length=250)
-    state = models.CharField(max_length=2)
-    zip_code = models.IntegerField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+# class Location(models.Model):
+#     street = models.CharField(max_length=500)
+#     city = models.CharField(max_length=250)
+#     state = models.CharField(max_length=2)
+#     zip_code = models.IntegerField()
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
 
 # EVENT MODEL
 class Event(models.Model):
     name = models.CharField(max_length=255)
     datetime = models.DateTimeField(auto_now=False)
     description = models.CharField(max_length=5000)
-    location = models.ForeignKey(Location, related_name='events')
+    # location = models.ForeignKey(Location, related_name='events')
+    location = models.CharField(max_length=1000)
     sport = models.ForeignKey(Sport, related_name='events')
     user = models.ForeignKey(User, related_name='user_events')
     users = models.ManyToManyField(User, related_name='events')

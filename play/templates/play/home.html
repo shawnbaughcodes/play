@@ -6,7 +6,7 @@
             <div class="nav-wrapper search_bar">
                 <form class="">
                     <div class="input-field">
-                        <input id="search" type="search" required>
+                        <input id="search" type="search" placeholder="Search for players, teams, and games..." required>
                         <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                         <i class="material-icons">close</i>
                     </div>
@@ -19,7 +19,7 @@
           <div class="container">
               <div class="col 12">
                   <!-- SIDEBAR -->
-                  <div class="side_nav z-depth-4">
+                  <div class="side_nav z-depth-3 ">
                       <div class="user_info">
                           <div class="col s3">
                               <p id="current_user">   {{current_user.first_name}} {{current_user.last_name}}
@@ -34,11 +34,75 @@
                       </div>
                   </div>
                   <!-- EVENTS -->
-                  <div class="events z-depth-4">
-                      <h1>Events</h1>
+                  <div class="events">
+                      <div class="new_event">
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <input placeholder="Game Title" id="name" type="text" class="validate">
+                                    </div>
+                                    <div class="input-field col s3">
+                                        <input id="datetime" type="date" class="validate">
+                                        <!-- <label for="datetime">Date and Time</label> -->
+                                    </div>
+                                    <div class="input-field col s3">
+                                        <input id="datetime" type="time" class="validate timepicker">
+                                        <!-- <label for="datetime">Date and Time</label> -->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s4">
+                                        <select>
+                                            <option value="" disabled selected>Choose Sport</option>
+                                            {%for sport in sports%}
+                                            <option value="{{sport.name}}">{{sport.name}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+                                <!-- </div> -->
+                                <!-- <div class="row"> -->
+                                    <div class="input-field col s4">
+                                        <select multiple>
+                                            <option value="" disabled selected>Choose Teams(If applicable)</option>
+                                            {%for sport in sports%}
+                                            <option value="{{sport.name}}">{{sport.name}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+                                    <div class="input-field col s4">
+                                        <select multiple>
+                                            <option value="" disabled selected>Choose Players(If applicable)</option>
+                                            {%for user in users%}
+                                            <option value="{{user.name}}">{{user.first_name}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="search_term" type="search" name="location" placeholder="Location">
+                                        <label for="location">Location</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                        <label for="description">Description</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s12">
+                                        <input class="btn" type="submit" value="Post">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                      </div>
                       {%for event in events%}
-                      <div class="event">
+                      <div class="event z-depth-1">
                           <h5>{{event.name}}</h5>
+                          <h4>{{event.sport.name}}</h4>
                           <h5>{{event.location.street}}
                               {{event.location.city}}
                               {{event.location.state}}
@@ -54,57 +118,39 @@
                       <!-- LEADERBOARD -->
                       <div class="leaderboard z-depth-4">
                           <div class="leaderboard_title">
-                              <h2>Leaderboard</h2>
-                              <h4>Your Rankings</h4>
-                              <h5>{{current_user.first_name}}</h5>
-                          </div>
-                          <div class="leaderboard_table">
-                              <table class="borderd highlight">
-                                  <thead>
-                                      <tr>
-                                          <th>Name</th>
-                                          <th>Sports</th>
-                                          <th>Rankings</th>
-                                      </tr>
-                                  </thead>
-
-                                  <tbody>
-
-                                      <tr>
-                                          <td>user.name</td>
-                                          <td>user.sport</td>
-                                          <td>user.ranking</td>
-                                      </tr>
-
-                                  </tbody>
-                              </table>
+                              <h5>Leaderboard</h5>
+                                <ul class="collection">
+                                    {%for user in users%}
+                                    <li class="collection-item">{{user.first_name}} {{user.last_name}}</li>
+                                    {%endfor%}
+                                </ul>
                           </div>
                       </div>
                       <!-- TEAMS -->
                       <div class="teams z-depth-4">
-                          <table class="borderd highlight">
-                              <thead>
-                                  <tr>
-                                      <th>Team Name</th>
-                                      <th>Teammates</th>
-                                      <th>Sport</th>
-                                  </tr>
-                              </thead>
-
-                              <tbody>
-
-                                  <tr>
-                                      <td id="">team.name</td>
-                                      <td id="">team.users</td>
-                                      <td id="">team.sport</td>
-                                  </tr>
-
-                              </tbody>
-                          </table>
+                          <h5>My Teams</h5>
+                          <div class="team_list">
+                              <ul class="collection">
+                                  {%for user in users%}
+                                  {%if user|length == 0%}
+                                  <li class="collection-item">No Teams</li>
+                                  {%else%}
+                                  <li class="collection-item">{{user.first_name}} {{user.last_name}}</li>
+                                  {%endif%}
+                                  {%endfor%}
+                              </ul>
+                          </div>
                       </div>
                   </div>
               </div>
           </div>
       </div>
+      <script type="text/javascript">
+          function activatePlacesSearch() {
+              let input = document.getElementById('search_term');
+              let autocomplete = new google.maps.places.Autocomplete(input);
+          }
+      </script>
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv2asEHOwHeEb1a5I5mqmljY8cLc8bJwc&libraries=places&callback=activatePlacesSearch"></script>
 
 {%endblock%}
