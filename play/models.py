@@ -39,7 +39,18 @@ class UserManager(models.Manager):
             request.session['user_id'] = user.id
     # END LOGIN
 # END USER MANAGER
-
+class EventManager(models.Manager):
+    def create_event(self, post):
+        event = Event.objects.create(
+            name=post.get('name'),
+            date=date,
+            time=time,
+            description=post.get('description'),
+            location=post.get('location'),
+            sport=Sport.objects.get(id=post.get('sport')),
+            user=User.objects.get(id=post.get('players'))
+        )
+        return event
 # USER MODEL
 class User(models.Model):
     first_name = models.CharField(max_length=255)
@@ -78,7 +89,8 @@ class Team(models.Model):
 # EVENT MODEL
 class Event(models.Model):
     name = models.CharField(max_length=255)
-    datetime = models.DateTimeField(auto_now=False)
+    date = models.CharField(max_length=100)
+    time = models.CharField(max_length=100)
     description = models.CharField(max_length=5000)
     # location = models.ForeignKey(Location, related_name='events')
     location = models.CharField(max_length=1000)
@@ -88,7 +100,7 @@ class Event(models.Model):
     teams = models.ManyToManyField(Team, related_name='events')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    objects = EventManager()
 
 # CHATROOM MODEL
 class Message(models.Model):

@@ -37,57 +37,55 @@
                   <div class="events">
                       <div class="new_event">
                         <div class="row">
-                            <form class="col s12">
+                            <form id="add_event" class="col s12" action="/add_event" method="post">
+                                {% csrf_token %}
                                 <div class="row">
                                     <div class="input-field col s6">
-                                        <input placeholder="Game Title" id="name" type="text" class="validate">
+                                        <input name="name" placeholder="Game Title" id="name" type="text" class="validate">
                                     </div>
                                     <div class="input-field col s3">
-                                        <input id="datetime" type="date" class="validate">
-                                        <!-- <label for="datetime">Date and Time</label> -->
+                                        <input name="date" id="datetime" type="text" class="validate datepicker" placeholder="Date">                 
                                     </div>
                                     <div class="input-field col s3">
-                                        <input id="datetime" type="time" class="validate timepicker">
-                                        <!-- <label for="datetime">Date and Time</label> -->
+                                        <input name="time" id="datetime" type="text" class="validate timepicker" placeholder="Time">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s4">
-                                        <select>
+                                        <select name="sport">
                                             <option value="" disabled selected>Choose Sport</option>
                                             {%for sport in sports%}
-                                            <option value="{{sport.name}}">{{sport.name}}</option>
+                                            <option value="{{sport.id}}">{{sport.name}}</option>
                                             {%endfor%}
                                         </select>
                                     </div>
                                 <!-- </div> -->
                                 <!-- <div class="row"> -->
                                     <div class="input-field col s4">
-                                        <select multiple>
+                                        <select multiple name="teams">
                                             <option value="" disabled selected>Choose Teams(If applicable)</option>
                                             {%for sport in sports%}
-                                            <option value="{{sport.name}}">{{sport.name}}</option>
+                                            <option value="{{sport.id}}">{{sport.name}}</option>
                                             {%endfor%}
                                         </select>
                                     </div>
                                     <div class="input-field col s4">
-                                        <select multiple>
+                                        <select id="players" multiple name="players">
                                             <option value="" disabled selected>Choose Players(If applicable)</option>
                                             {%for user in users%}
-                                            <option value="{{user.name}}">{{user.first_name}}</option>
+                                            <option value="{{user.id}}">{{user.first_name}}</option>
                                             {%endfor%}
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <input id="search_term" type="search" name="location" placeholder="Location">
-                                        <label for="location">Location</label>
+                                        <input id="search_term" type="text" name="location" placeholder="Location">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                        <textarea id="textarea1" name="description" class="materialize-textarea"></textarea>
                                         <label for="description">Description</label>
                                     </div>
                                 </div>
@@ -103,14 +101,11 @@
                       <div class="event z-depth-1">
                           <h5>{{event.name}}</h5>
                           <h4>{{event.sport.name}}</h4>
-                          <h5>{{event.location.street}}
-                              {{event.location.city}}
-                              {{event.location.state}}
-                              {{event.location.zip_code}}
+                          <h5>{{event.location}}
                           </h5>
                           <h6>Hosted by {{event.user.first_name}}</h6>
-                          <h6>{{event.datetime.date}}</h6>
-                          <h6>@ {{event.datetime.time}}</h6>
+                          <h6>{{event.date}}</h6>
+                          <h6>@ {{event.time}}</h6>
                       </div>
                       {%endfor%}
                   </div>

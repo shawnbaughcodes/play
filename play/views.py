@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
 from django.contrib import messages
-import operator
+import operator, datetime
 # Create your views here.
 
 # CURRENT USER
@@ -74,22 +74,22 @@ def home(request):
     }
     return render(request, 'play/home.html', context)
 # RENDER SPORT PAGE
-def sport(request):
-    user = current_user(request)
-    # user_sports = user.sports.all()
-    sports_ids = []
-
-    for sport in user.sports.all():
-        sports_ids.append(sport.id)
-
-    context = {
-    'current_user': user,
-    'sports': Sport.objects.all(),
-    'user_sports': user.sports.all(),
-    'events': events,
-    'sports_ids': sports_ids,
-    }
-    return render(request, 'play/sport.html', context)
+# def sport(request):
+#     user = current_user(request)
+#     # user_sports = user.sports.all()
+#     sports_ids = []
+#
+#     for sport in user.sports.all():
+#         sports_ids.append(sport.id)
+#
+#     context = {
+#     'current_user': user,
+#     'sports': Sport.objects.all(),
+#     'user_sports': user.sports.all(),
+#     'events': events,
+#     'sports_ids': sports_ids,
+#     }
+#     return render(request, 'play/sport.html', context)
 # ADD SPORT
 def add_sport(request, id):
     user = current_user(request)
@@ -102,19 +102,19 @@ def remove_sport(request, id):
     sport = Sport.objects.get(id=id)
     user.sports.remove(sport)
     return redirect('/sports')
-# SHOW SPORT EVENT PAGE
-def sport_event(request, id):
-    sport = Sport.objects.get(id=id)
-    user = current_user(request)
-    events = Event.objects.filter(sport = sport)
-    users_sports = sport.users.all()
-    context = {
-        'sport': sport,
-        'current_user': user,
-        'events': events,
-        'users_sports': users_sports
-    }
-    return render(request, 'play/event_sport.html', context)
+# # SHOW SPORT EVENT PAGE
+# def sport_event(request, id):
+#     sport = Sport.objects.get(id=id)
+#     user = current_user(request)
+#     events = Event.objects.filter(sport = sport)
+#     users_sports = sport.users.all()
+#     context = {
+#         'sport': sport,
+#         'current_user': user,
+#         'events': events,
+#         'users_sports': users_sports
+#     }
+#     return render(request, 'play/event_sport.html', context)
 # NEW GAME PAGE
 def new_game(request, id):
     sport = Sport.objects.get(id=id)
@@ -125,6 +125,37 @@ def new_game(request, id):
     }
     return render(request, 'play/new_game.html', context)
 # ADD EVENT
-def add_event(request, id):
+def add_event(request):
+    # print request.POST
 
-    return redirect('/games/id')
+    print request.POST['time']
+    print request.POST['date']
+    
+    # print datetime.datetime.combine(datetime.datetime.date(request.POST['date']), datetime.datetime.time(request.POST['time']))
+    # print timestamp
+
+    # return redirect('/home')
+    # print type(request.POST['players'])
+    # print request.POST['players']
+    users_array = [int(x) for x in request.POST.getlist('players')]
+    # print users_array
+    user = current_user(request)
+    datetime = request.POST['date'] #+ request.POST['time']
+    event = Event.objects.create(
+        name=request.POST['name'],
+        date=request.POST['date'],
+        time=request.POST['time'],
+        description=request.POST['description'],
+        location=request.POST['location'],
+        sport=Sport.objects.get(id=request.POST['sport']),
+        user=user,
+    )
+    for user_id in users_array:
+        event.users.add(User.objects.get(id=user_id))
+    # event = Event.objects.create_event(request.POST)
+    # event.users.add(User.objects.get(id=request.POST['user']))
+    # event.sport.add(Sport.objects.get(id=request.POST['sport']))
+
+    #add the team when ready
+    # event.teams.add(Team.objects.get(id=request.POST['teams']))
+    return redirect('/home')
