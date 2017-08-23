@@ -432,3 +432,6 @@ nav {
 .event_options h1:hover {
 	cursor: pointer;
 }
+.modal{
+	overflow-y: auto;
+}

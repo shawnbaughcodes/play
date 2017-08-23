@@ -51,6 +51,14 @@ class EventManager(models.Manager):
             user=User.objects.get(id=post.get('players'))
         )
         return event
+# TEAM MANAGER
+class TeamManager(models.Manager):
+    def create_team(self, post):
+        team = Team.objects.create(
+        name=post.get('name'),
+        sport=post.get('sport')
+        )
+# END TEAM MANAGER
 # USER MODEL
 class User(models.Model):
     first_name = models.CharField(max_length=255)

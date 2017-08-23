@@ -11,6 +11,6 @@ urlpatterns = [
     url(r'^sports/add/(?P<id>\d+)$', views.add_sport),
     url(r'^sport/remove/(?P<id>\d+)$', views.remove_sport),
     url(r'^add_event$', views.add_event),
-    url(r'^games/(?P<id>\d+)/new$', views.new_game),
+    url(r'^add_team$', views.add_team),
     url(r'^logout$', views.logout)
 ]

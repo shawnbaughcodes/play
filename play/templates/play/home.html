@@ -25,18 +25,53 @@
                               <p id="current_user">   {{current_user.first_name}} {{current_user.last_name}}
                               </p>
                               {%if current_user%}
-                              <a href="#"><button class="btn">Chat</button></a>
+                              <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Create Team</a>
+                              <a class="waves-effect waves-light btn modal-trigger" href="#modal2">Create Game</a>
                               <br>
+                              <a href="#"><button class="btn">Chat</button></a>
                               <br>
                               <a href="/logout"><button class="btn">Logout</button></a>
                               {%endif%}
                           </div>
                       </div>
                   </div>
-                  <!-- EVENTS -->
-                  <div class="events">
-                      <div class="new_event">
-                        <div class="row">
+                  <!-- MODAL 1 -->
+                    <div id="modal1" class="modal modal-fixed-footer">
+                        <div class="modal-content">
+                            <h4>Create A New Team</h4>
+                            <form class="" action="/add_team" method="post">
+                                {% csrf_token %}
+                                <input type="text" name="name" placeholder="Team Name">
+                                <div class="input-field col s12">
+                                    <select class="scrollable">
+                                        <option value="" disabled selected>Choose your Sport</option>
+                                        {%for sport in sports%}
+                                        <option value="{{sport.id}}">{{sport.name}}</option>
+                                        {%endfor%}
+                                    </select>
+                                    <label>Select Sport</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <select multiple>
+                                        <option disabled selected>Choose your Teammates</option>
+                                        {%for user in users%}
+                                            <option value="{{user.id}}">{{user.first_name}} {{user.last_name}}</option>
+                                        {%endfor%}
+                                    </select>
+                                    <label>Select Teammates</label>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+                                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"><input type="submit" name="" value="Create"></a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                  <!-- END MODAL 1 -->
+                  <!-- MODAL 2 -->
+                    <div id="modal2" class="modal modal-fixed-footer">
+                        <div class="modal-content">
+                            <h4>Create A New Game</h4>
                             <form id="add_event" class="col s12" action="/add_event" method="post">
                                 {% csrf_token %}
                                 <div class="row">
@@ -44,7 +79,7 @@
                                         <input name="name" placeholder="Game Title" id="name" type="text" class="validate">
                                     </div>
                                     <div class="input-field col s3">
-                                        <input name="date" id="datetime" type="text" class="validate datepicker" placeholder="Date">                 
+                                        <input name="date" id="datetime" type="text" class="validate datepicker" placeholder="Date">
                                     </div>
                                     <div class="input-field col s3">
                                         <input name="time" id="datetime" type="text" class="validate timepicker" placeholder="Time">
@@ -96,16 +131,26 @@
                                 </div>
                             </form>
                         </div>
-                      </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+                        </div>
+                    </div>
+                  <!-- END MODAL 2 -->
+                  <!-- EVENTS -->
+                  <div class="events">
                       {%for event in events%}
                       <div class="event z-depth-1">
                           <h5>{{event.name}}</h5>
                           <h4>{{event.sport.name}}</h4>
                           <h5>{{event.location}}
                           </h5>
-                          <h6>Hosted by {{event.user.first_name}}</h6>
+                          <h5>Hosted by {{event.user.first_name}}</h5>
                           <h6>{{event.date}}</h6>
                           <h6>@ {{event.time}}</h6>
+                          <h5>Other Players</h5>
+                          {%for user in event.users.all%}
+                          <h6>{{user.first_name}}</h6>
+                          {%endfor%}
                       </div>
                       {%endfor%}
                   </div>
