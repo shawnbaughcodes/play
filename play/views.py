@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import *
 from django.contrib import messages
 import operator, datetime
+import boto3
 # Create your views here.
 
 # CURRENT USER
