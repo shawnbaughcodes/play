@@ -41,6 +41,8 @@ def login(request):
 def logout(request):
     request.session.clear()
     return redirect('/')
+def add_user_photo(request):
+    pass
 # RENDER HOME
 def home(request):
     # class PlaySearchListView(PlayListView):
@@ -62,12 +64,13 @@ def home(request):
     event =  Event.objects.all()
     # for user in
 
-    events = Event.objects.prefetch_related('users').all()
+    events = Event.objects.prefetch_related('users').all().order_by('-created_at')
     friends = user.friend.all()
     users = User.objects.all()
     context = {
         'current_user': user,
         'sports': Sport.objects.all(),
+        'teams': Team.objects.all(),
         'user_sports': user.sports.all(),
         'sports_ids': sports_ids,
         'friends': friends,
@@ -120,9 +123,16 @@ def remove_sport(request, id):
 # ADD TEAM
 def add_team(request):
     users_array = [int(x) for x in request.POST.getlist('players')]
-    team = Team.objects.create_team(request.POST)
+    # print '*' * 50
+    # print type(request.POST['name'])
+    # print request.POST['name']
+    # print '*' * 50
+    team = Team.objects.create(
+        title=request.POST['title']
+    )
     for user_id in users_array:
         team.user.add(User.objects.get(id=user_id))
+    team.sport.add(Sport.objects.get(id=request.POST['sport']))
     return redirect('/home')
 # ADD EVENT
 def add_event(request):
@@ -130,7 +140,6 @@ def add_event(request):
     teams_array = [int(x) for x in request.POST.getlist('teams')]
     # print users_array
     user = current_user(request)
-    datetime = request.POST['date'] #+ request.POST['time']
     event = Event.objects.create(
         name=request.POST['name'],
         date=request.POST['date'],
@@ -144,10 +153,9 @@ def add_event(request):
         event.users.add(User.objects.get(id=user_id))
     for team_id in teams_array:
         event.teams.add(Team.objects.get(id=team_id))
+    event.teams.add(Team.objects.get(id=request.POST['teams']))
     # event = Event.objects.create_event(request.POST)
     # event.users.add(User.objects.get(id=request.POST['user']))
     # event.sport.add(Sport.objects.get(id=request.POST['sport']))
 
-    #add the team when ready
-    # event.teams.add(Team.objects.get(id=request.POST['teams']))
     return redirect('/home')

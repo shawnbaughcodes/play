@@ -52,12 +52,15 @@ class EventManager(models.Manager):
         )
         return event
 # TEAM MANAGER
-class TeamManager(models.Manager):
-    def create_team(self, post):
-        team = Team.objects.create(
-        name=post.get('name'),
-        sport=post.get('sport')
-        )
+# class TeamManager(models.Manager):
+#     def create_team(self, post):
+#         team = Team.objects.create(
+#         title=post.get('title'),
+#         )
+#         return team
+    # VALIDATIONS
+    # def team_validations(self, post):
+    #     pass
 # END TEAM MANAGER
 # USER MODEL
 class User(models.Model):
@@ -79,11 +82,12 @@ class Sport(models.Model):
 
 # TEAM MODEL
 class Team(models.Model):
-    name = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     users = models.ManyToManyField(User, related_name="teams")
     sport = models.ForeignKey(Sport, related_name='teams')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    # objects = TeamManager()
 
 # LOCATION MODEL
 # class Location(models.Model):

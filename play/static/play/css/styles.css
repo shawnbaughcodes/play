@@ -6,7 +6,7 @@
 }
 body {
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: hidden;
 	font-weight:
 }
 div.header {
@@ -89,6 +89,12 @@ a {
 #current_user {
     text-align: left;
     padding-right: 2%;
+	text-align: center;
+}
+img#cu_img {
+	margin-top: 5pt;
+	width: 50pt;
+	height: 50pt;
 }
 .container {
 	width: 80%;
@@ -107,10 +113,6 @@ a {
 	text-align: center;
 	display: inline-block;
 	margin-left: 1vw;
-}
-#current_user {
-	margin-top: 5vh;
-	text-align: center;
 }
 .friends {
 	margin-top: 15%;
@@ -139,8 +141,9 @@ nav {
 }
 /*EVENTS*/
 .events {
-	margin: 3%;
-	height: 85vh;
+	margin-left: 3%;
+	margin-right: 3%;
+	height: 100vh;
 	width: 40vw;
 	display: inline-block;
 	vertical-align: top;
@@ -155,6 +158,8 @@ nav {
 .event {
 	background: white;
 	padding: 2%;
+	margin-top: 2%;
+	margin-bottom: 2%;
 }
 .event h4 {
 	text-align: center;

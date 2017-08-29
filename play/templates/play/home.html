@@ -1,7 +1,7 @@
 {%extends 'play/block_content.html'%}
 {%block content%}
     <!-- SEARCHBAR -->
-    <div class="navbar-fixed">
+    <!-- <div class="navbar-fixed">
         <nav class="">
             <div class="nav-wrapper search_bar">
                 <form class="">
@@ -13,7 +13,7 @@
                 </form>
             </div>
         </nav>
-    </div>
+    </div> -->
 
       <div class="content">
           <div class="container">
@@ -22,15 +22,17 @@
                   <div class="side_nav z-depth-3 ">
                       <div class="user_info">
                           <div class="col s3">
+                              {%load static%}
+                              <img class="responsive-img circle" id="cu_img" src="{%static 'play/img/default_user_image.jpg' %}" alt="Default Image">
                               <p id="current_user">   {{current_user.first_name}} {{current_user.last_name}}
                               </p>
                               {%if current_user%}
                               <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Create Team</a>
                               <a class="waves-effect waves-light btn modal-trigger" href="#modal2">Create Game</a>
                               <br>
-                              <a href="#"><button class="btn">Chat</button></a>
+                              <a class="waves-effect waves-light btn modal-trigger" href="#modal3">Chat</a>
                               <br>
-                              <a href="/logout"><button class="btn">Logout</button></a>
+                              <a class="waves-effect waves-light btn" href="/logout">Logout</a>
                               {%endif%}
                           </div>
                       </div>
@@ -41,7 +43,11 @@
                             <h4>Create A New Team</h4>
                             <form class="" action="/add_team" method="post">
                                 {% csrf_token %}
-                                <input type="text" name="name" placeholder="Team Name">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input type="text" name="title" placeholder="Team Name">
+                                    </div>
+                                </div>
                                 <div class="input-field col s12">
                                     <select class="scrollable">
                                         <option value="" disabled selected>Choose your Sport</option>
@@ -62,7 +68,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-                                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"><input type="submit" name="" value="Create"></a>
+                                    <a class="modal-action modal-close waves-effect waves-green btn-flat"><input type="submit" value="Create"></a>
                                 </div>
                             </form>
                         </div>
@@ -99,8 +105,8 @@
                                     <div class="input-field col s4">
                                         <select multiple name="teams">
                                             <option value="" disabled selected>Choose Teams(If applicable)</option>
-                                            {%for sport in sports%}
-                                            <option value="{{sport.id}}">{{sport.name}}</option>
+                                            {%for team in teams%}
+                                            <option value="{{team.id}}">{{team.name}}</option>
                                             {%endfor%}
                                         </select>
                                     </div>
@@ -124,16 +130,17 @@
                                         <label for="description">Description</label>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col s12">
                                         <input class="btn" type="submit" value="Post">
                                     </div>
+                                </div> -->
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+                                    <input class="modal-action modal-close waves-effect waves-green btn-flat " type="submit" value="Submit">
                                 </div>
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-                        </div>
                     </div>
                   <!-- END MODAL 2 -->
                   <!-- EVENTS -->
@@ -172,13 +179,13 @@
                           <h5>My Teams</h5>
                           <div class="team_list">
                               <ul class="collection">
-                                  {%for user in users%}
-                                  {%if user|length == 0%}
+                                  {%if teams|length == 0%}
                                   <li class="collection-item">No Teams</li>
                                   {%else%}
-                                  <li class="collection-item">{{user.first_name}} {{user.last_name}}</li>
+                                    {%for team in teams%}
+                                        <li class="collection-item">{{team.name}}</li>
+                                    {%endfor%}
                                   {%endif%}
-                                  {%endfor%}
                               </ul>
                           </div>
                       </div>
