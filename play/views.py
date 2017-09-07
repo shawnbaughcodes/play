@@ -78,23 +78,7 @@ def home(request):
         'users': users,
     }
     return render(request, 'play/home.html', context)
-# RENDER SPORT PAGE
-# def sport(request):
-#     user = current_user(request)
-#     # user_sports = user.sports.all()
-#     sports_ids = []
-#
-#     for sport in user.sports.all():
-#         sports_ids.append(sport.id)
-#
-#     context = {
-#     'current_user': user,
-#     'sports': Sport.objects.all(),
-#     'user_sports': user.sports.all(),
-#     'events': events,
-#     'sports_ids': sports_ids,
-#     }
-#     return render(request, 'play/sport.html', context)
+
 # ADD SPORT
 def add_sport(request, id):
     user = current_user(request)
@@ -107,32 +91,16 @@ def remove_sport(request, id):
     sport = Sport.objects.get(id=id)
     user.sports.remove(sport)
     return redirect('/sports')
-# # SHOW SPORT EVENT PAGE
-# def sport_event(request, id):
-#     sport = Sport.objects.get(id=id)
-#     user = current_user(request)
-#     events = Event.objects.filter(sport = sport)
-#     users_sports = sport.users.all()
-#     context = {
-#         'sport': sport,
-#         'current_user': user,
-#         'events': events,
-#         'users_sports': users_sports
-#     }
-#     return render(request, 'play/event_sport.html', context)
 # ADD TEAM
 def add_team(request):
     users_array = [int(x) for x in request.POST.getlist('players')]
-    # print '*' * 50
-    # print type(request.POST['name'])
-    # print request.POST['name']
-    # print '*' * 50
     team = Team.objects.create(
-        title=request.POST['title']
+        title=request.POST['title'],
+        sport=Sport.objects.get(id=request.POST['sport'])
     )
     for user_id in users_array:
         team.user.add(User.objects.get(id=user_id))
-    team.sport.add(Sport.objects.get(id=request.POST['sport']))
+    # team.sport.add(Sport.objects.get(id=request.POST['sport']))
     return redirect('/home')
 # ADD EVENT
 def add_event(request):
@@ -159,3 +127,13 @@ def add_event(request):
     # event.sport.add(Sport.objects.get(id=request.POST['sport']))
 
     return redirect('/home')
+
+def chat_room(request, label):
+    room, created = Room.objects.get_or_create(label=label)
+
+    messages = reversed(room.messages.order_by('-timestamp')[:50])
+
+    return render(request, "play/room.html", {
+        'room': room,
+        'messages': messages,
+    })

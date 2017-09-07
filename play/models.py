@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from polymorphic.models import PolymorphicModel
+# from polymorphic.models import PolymorphicModel
 import re, bcrypt
 # models below.
 # USER MANAGER
@@ -89,15 +89,6 @@ class Team(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     # objects = TeamManager()
 
-# LOCATION MODEL
-# class Location(models.Model):
-#     street = models.CharField(max_length=500)
-#     city = models.CharField(max_length=250)
-#     state = models.CharField(max_length=2)
-#     zip_code = models.IntegerField()
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-
 # EVENT MODEL
 class Event(models.Model):
     name = models.CharField(max_length=255)
@@ -115,17 +106,13 @@ class Event(models.Model):
     objects = EventManager()
 
 # CHATROOM MODEL
+class Room(models.Model):
+    name = models.TextField()
+    label = models.SlugField(unique=True)
+
 class Message(models.Model):
+    room = models.ForeignKey(Room, related_name='messages')
+    handle = models.TextField()
     message = models.TextField()
-    user = models.ForeignKey(User, related_name='messages')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-class Chatroom(PolymorphicModel):
-    message = models.ForeignKey(Message, related_name='messages')
-    users = models.ManyToManyField(User, related_name='chatrooms')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-class EventChatroom(Chatroom):
-    event = models.ForeignKey(Event, related_name='messages')

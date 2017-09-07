@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^add_event$', views.add_event),
     url(r'^add_team$', views.add_team),
     url(r'^add_user_photo$', views.add_user_photo),
-    url(r'^logout$', views.logout)
+    url(r'^logout$', views.logout),
+    url(r'^chat$', views.chat_room)
 ]
