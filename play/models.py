@@ -62,6 +62,15 @@ class EventManager(models.Manager):
     # def team_validations(self, post):
     #     pass
 # END TEAM MANAGER
+# POST MANAGER
+class PostManager(models.Manager):
+    # CREATE POST
+    def create_post(self, post):
+        post = Post.objects.create(
+        content=post.get('content')
+        )
+        return post
+# END POST MANAGER
 # USER MODEL
 class User(models.Model):
     first_name = models.CharField(max_length=255)
@@ -105,14 +114,22 @@ class Event(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = EventManager()
 
-# CHATROOM MODEL
-class Room(models.Model):
-    name = models.TextField()
-    label = models.SlugField(unique=True)
-
-class Message(models.Model):
-    room = models.ForeignKey(Room, related_name='messages')
-    handle = models.TextField()
-    message = models.TextField()
+# POST MODEL
+class Post(models.Model):
+    content = models.TextField()
+    user = models.ForeignKey(User, related_name='user_posts')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = PostManager()
+
+# # CHATROOM MODEL
+# class Room(models.Model):
+#     name = models.TextField()
+#     label = models.SlugField(unique=True)
+#
+# class Message(models.Model):
+#     room = models.ForeignKey(Room, related_name='messages')
+#     handle = models.TextField()
+#     message = models.TextField()
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)

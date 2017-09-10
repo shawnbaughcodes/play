@@ -72,6 +72,7 @@ def home(request):
         'sports': Sport.objects.all(),
         'teams': Team.objects.all(),
         'user_sports': user.sports.all(),
+        'posts': Post.objects.all().order_by('-created_at'),
         'sports_ids': sports_ids,
         'friends': friends,
         'events': events,
@@ -128,6 +129,17 @@ def add_event(request):
 
     return redirect('/home')
 
+# CREATE POST
+def make_post(request):
+    user = current_user(request)
+    post = Post.objects.create(
+        content=request.POST['content'],
+        user=user
+    )
+    # post = Post.objects.create_post(request.POST)
+    # post.user.add(User.objects.get(id=user_id))
+    return redirect('/home')
+# CHATROOM
 def chat_room(request, label):
     room, created = Room.objects.get_or_create(label=label)
 

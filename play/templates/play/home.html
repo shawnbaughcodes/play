@@ -1,25 +1,27 @@
 {%extends 'play/block_content.html'%}
 {%block content%}
 
-      <div class="content">
+      <div class="content hide-on-med-and-down">
           <div class="col 12">
-              <!-- SIDEBAR -->  
+              <!-- SIDEBAR -->
               <div class="side_nav z-depth-3 ">
                   <div class="user_info">
-                      <div class="col s3">
+                      <!-- <div class="col s3"> -->
                           {%load static%}
                           <img class="responsive-img circle" id="cu_img" src="{%static 'play/img/default_user_image.jpg' %}" alt="Default Image">
-                          <p id="current_user">   {{current_user.first_name}} {{current_user.last_name}}
-                          </p>
+                          <h5 id="current_user">   {{current_user.first_name}} {{current_user.last_name}}
+                          </h5>
                           {%if current_user%}
-                          <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Create Team</a>
-                          <a class="waves-effect waves-light btn modal-trigger" href="#modal2">Create Game</a>
-                          <br>
-                          <a class="waves-effect waves-light btn modal-trigger" href="#modal3">Chat</a>
-                          <br>
-                          <a class="waves-effect waves-light btn" href="/logout">Logout</a>
+                          <ul>
+                              <li><a class="waves-effect waves-light" href="/home">Home</a></li>
+                              <li><a class="waves-effect waves-light modal-trigger" href="#modal4">My Events</a></li>
+                              <li><a class="waves-effect waves-light modal-trigger" href="#modal1">Create Team</a></li>
+                              <li><a class="waves-effect waves-light modal-trigger" href="#modal2">Create Game</a></li>
+                              <li><a class="waves-effect waves-light modal-trigger" href="#modal3">Chat</a></li>
+                          </ul>
+                          <a id="logout_button" class="waves-effect waves-light" href="/logout">Logout</a>
                           {%endif%}
-                      </div>
+                      <!-- </div> -->
                   </div>
               </div>
               <!-- MODAL 1 -->
@@ -135,25 +137,62 @@
                     </div>
                 </div>
               <!-- END MODAL 3 -->
-              <!-- EVENTS -->
-              <div class="events">
-                  {%for event in events%}
-                  <div class="event z-depth-1">
-                      <h5>{{event.name}}</h5>
-                      <h4>{{event.sport.name}}</h4>
-                      <h5>{{event.location}}
-                      </h5>
-                      <h5>Hosted by {{event.user.first_name}}</h5>
-                      <h6>{{event.description}}</h6>
-                      <h6>{{event.date}}</h6>
-                      <h6>@ {{event.time}}</h6>
-                      <h5>Other Players</h5>
-                      {%for user in event.users.all%}
-                      <h6>{{user.first_name}}</h6>
+              <!-- MODAL 4 -->
+                <div id="modal4" class="modal">
+                    <div class="modal-content">
+                        <h4>Your Events</h4>
+                        <!-- EVENTS -->
+                        <div class="events">
+                            {%for event in events%}
+                            <div class="event z-depth-1">
+                                <h5>{{event.name}}</h5>
+                                <h4>{{event.sport.name}}</h4>
+                                <h5>{{event.location}}
+                                </h5>
+                                <h5>Hosted by {{event.user.first_name}}</h5>
+                                <h6>{{event.description}}</h6>
+                                <h6>{{event.date}}</h6>
+                                <h6>@ {{event.time}}</h6>
+                                <h5>Other Players</h5>
+                                {%for user in event.users.all%}
+                                <h6>{{user.first_name}}</h6>
+                                {%endfor%}
+                            </div>
+                            {%endfor%}
+                        </div>
+                    </div>
+                </div>
+              <!-- END MODAL 4 -->
+              <!-- POSTS -->
+              <div class="posts container">
+                  <div class="post_form container z-depth-3">
+                    <div class="row">
+                        <form class="col s12 container" action="/make_post" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="textarea1" class="materialize-textarea" placeholder="Post about your recent games and latest sports news..." name="content"></textarea>
+                                    <input type="submit" value="Post" class="btn">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                  </div>
+                  <div class="all_posts container">
+                      {%for post in posts%}
+                      <div class="post z-depth-3">
+                          <div class="post_head">
+                              <img id="post_user_pic" src="{%static 'play/img/default_user_image.jpg' %}" alt="" class="circle responsive-img">
+                              <h4>{{post.user.first_name}} {{post.user.last_name}}</h4>
+                          </div>
+                          <div class="post_content">
+                              <p>{{post.content}}</p>
+                          </div>
+                      </div>
                       {%endfor%}
                   </div>
-                  {%endfor%}
               </div>
+              <!-- END POSTS -->
               <div class="teams_and_user_sports">
                   <!-- LEADERBOARD -->
                   <div class="leaderboard z-depth-4">
@@ -183,6 +222,10 @@
                   </div>
               </div>
           </div>
+      </div>
+
+      <div class="play_mobile show-on-medium-and-up">
+          <h1>Mobile</h1>
       </div>
       <script type="text/javascript">
           function activatePlacesSearch() {
