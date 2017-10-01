@@ -3,6 +3,9 @@ $(document).ready(function() {
     $('#modal2').modal();
     $('#modal3').modal();
     $('#modal4').modal();
+    $('#new_post_icon').click(function(){
+        $('.post_form').fadeToggle()
+    })
     $('select').material_select();
     $('.timepicker').pickatime({
         default: 'now', // Set default time: 'now', '1:30AM', '16:30'
@@ -22,5 +25,8 @@ $(document).ready(function() {
         clear: 'Clear',
         close: 'Ok',
         closeOnSelect: false // Close upon selecting a date,
+    });
+    $(".button-collapse").sideNav({
+        menuWidth: 400
     });
 });

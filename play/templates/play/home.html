@@ -223,9 +223,43 @@
               </div>
           </div>
       </div>
-
-      <div class="play_mobile show-on-medium-and-up">
-          <h1>Mobile</h1>
+<!-- ************MOBILE PLAY APP********** -->
+      <div class="play_mobile show-on-medium-and-down">
+        <div class="play_mobile_content">
+            <!-- MOBILE POSTS -->
+            <!-- POSTS -->
+            <div class="mobile_posts">
+                <div class="mobile_all_posts container">
+                    {%for post in posts%}
+                    <div class="mobile_post z-depth-3">
+                        <div class="post_head">
+                            <img id="post_user_pic" src="{%static 'play/img/default_user_image.jpg' %}" alt="" class="circle responsive-img">
+                            <h4>{{post.user.first_name}} {{post.user.last_name}}</h4>
+                        </div>
+                        <div class="post_content">
+                            <p>{{post.content}}</p>
+                        </div>
+                    </div>
+                    {%endfor%}
+                </div>
+            </div>
+            <!-- END POSTS -->
+            <!-- END MOBILE POSTS -->
+            <div class="mobile_nav">
+                <div class="nav_button1">
+                    <img src="" alt="Posts">
+                </div>
+                <div class="nav_button2">
+                    <img src="" alt="News">
+                </div>
+                <div class="nav_button3">
+                    <img src="" alt="Chat">
+                </div>
+                <div class="nav_button4">
+                    <img src="" alt="Profile">
+                </div>
+            </div>
+        </div>
       </div>
       <script type="text/javascript">
           function activatePlacesSearch() {

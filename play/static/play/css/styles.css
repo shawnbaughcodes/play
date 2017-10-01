@@ -4,6 +4,9 @@
 	margin: 0;
 	border: 0;
 }
+/*html {
+	background: #22313F;
+}*/
 body {
 	overflow-x: hidden;
 	overflow-y: hidden;
@@ -319,7 +322,7 @@ nav {
 .modal{
 	overflow-y: auto;
 }
-/*POSTS STYLES*/
+/* S STYLES*/
 .all_posts {
 	overflow-y: scroll;
 }
@@ -334,13 +337,13 @@ nav {
 	border-radius: 5px;
 }
 .post_head {
-	margin-top: 5%;
 	padding-top: 1%;
 }
 .post {
 	background: white;
 	padding-bottom: 2%;
 	border-radius: 5px;
+	margin-top: 5%;
 }
 .post_head h4 {
 	display: inline-block;
@@ -352,4 +355,61 @@ nav {
 }
 .post_content p {
 	margin-left: 2%;
+}
+/*MOBILE
+EDITS
+TO
+PLAY
+*/
+.play_mobile {
+	background: #22313F;
+}
+.play_mobile_content {
+	height: 100vh;
+}
+.mobile_all_posts {
+	padding-top: 5%;
+	height: 93vh;
+}
+.mobile_post {
+	background: white;
+	padding-bottom: 2%;
+	border-radius: 5px;
+	margin-top: 5%;
+}
+.mobile_post h4 {
+	font-size: 40pt;
+}
+.mobile_post p {
+	font-size: 20pt;
+}
+a#new_post_icon {
+	float: right;
+}
+.mobile_nav {
+	height: 7vh;
+	background: white;
+}
+.mobile_nav {
+	text-align: center;
+}
+.nav_button1 {
+	display: inline-block;
+	width: 24%;
+	height: 7vh;
+}
+.nav_button2 {
+	display: inline-block;
+	width: 24%;
+	height: 7vh;
+}
+.nav_button3 {
+	display: inline-block;
+	width: 24%;
+	height: 7vh;
+}
+.nav_button4 {
+	display: inline-block;
+	width: 24%;
+	height: 7vh;
 }
