@@ -29,4 +29,28 @@ $(document).ready(function() {
     $(".button-collapse").sideNav({
         menuWidth: 400
     });
+    $(".nav_button1").click(function() {
+        $('.nav_icon1').css('color', '#336E7B')
+        $('.nav_icon2').css('color', 'black')
+        $('.nav_icon3').css('color', 'black')
+        $('.nav_icon4').css('color', 'black')
+    })
+    $(".nav_button2").click(function() {
+        $('.nav_icon1').css('color', 'black')
+        $('.nav_icon2').css('color', '#336E7B')
+        $('.nav_icon3').css('color', 'black')
+        $('.nav_icon4').css('color', 'black')
+    })
+    $(".nav_button3").click(function() {
+        $('.nav_icon1').css('color', 'black')
+        $('.nav_icon2').css('color', 'black')
+        $('.nav_icon3').css('color', '#336E7B')
+        $('.nav_icon4').css('color', 'black')
+    })
+    $(".nav_button4").click(function() {
+        $('.nav_icon1').css('color', 'black')
+        $('.nav_icon2').css('color', 'black')
+        $('.nav_icon3').css('color', 'black')
+        $('.nav_icon4').css('color', '#336E7B')
+    })
 });

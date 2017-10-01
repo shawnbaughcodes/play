@@ -391,25 +391,61 @@ a#new_post_icon {
 	background: white;
 }
 .mobile_nav {
-	text-align: center;
+	/*text-align: center;*/
 }
 .nav_button1 {
 	display: inline-block;
 	width: 24%;
 	height: 7vh;
 }
+.nav_button1 p {
+	font-size: 20pt;
+}
 .nav_button2 {
 	display: inline-block;
 	width: 24%;
 	height: 7vh;
+}
+.nav_button2 p {
+	font-size: 20pt;
 }
 .nav_button3 {
 	display: inline-block;
 	width: 24%;
 	height: 7vh;
 }
+.nav_button3 p {
+	font-size: 20pt;
+}
 .nav_button4 {
 	display: inline-block;
 	width: 24%;
 	height: 7vh;
+}
+.nav_button4 p {
+	font-size: 20pt;
+}
+.nav_icon1 {
+	width: 6.5vh;
+}
+.nav_icon1 i{
+	margin-left: 50%;
+}
+.nav_icon2 {
+	width: 6.5vh;
+}
+.nav_icon2 i{
+	margin-left: 50%;
+}
+.nav_icon3 {
+	width: 6.5vh;
+}
+.nav_icon3 i{
+	margin-left: 50%;
+}
+.nav_icon4 {
+	width: 6.5vh;
+}
+.nav_icon4 i{
+	margin-left: 50%;
 }
